@@ -33,11 +33,9 @@ public class Booking {
 	public Booking() {
 		super();
 	}
-
+  
 	public Booking(User user, Car car, Date booking_from_date, Date booking_to_date) {
 		super();
-		this.user = user;
-		this.car = car;
 		this.booking_from_date = booking_from_date;
 		this.booking_to_date = booking_to_date;
 	}
