@@ -1,55 +1,38 @@
-package com.cbs.entity;
+package com.cbs.dto;
 
 import java.time.Instant;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "booking")
-public class Booking {
+public class BookingDTO {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
-	private User user;
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "car_id", nullable = false)
-	private Car car;
+	private UserDTO user;
+	private CarDTO car;
 	private Instant booking_from_date;
 	private Instant booking_to_date;
 	
-	public Booking() {
+	public BookingDTO() {
 		super();
 	}
 
-	public Booking(Instant booking_from_date, Instant booking_to_date) {
+	public BookingDTO( Instant booking_from_date, Instant booking_to_date) {
 		super();
 		this.booking_from_date = booking_from_date;
 		this.booking_to_date = booking_to_date;
 	}
 
-	public User getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserDTO user) {
 		this.user = user;
 	}
 
-	public Car getCar() {
+	public CarDTO getCar() {
 		return car;
 	}
 
-	public void setCar(Car car) {
+	public void setCar(CarDTO car) {
 		this.car = car;
 	}
 
@@ -74,5 +57,4 @@ public class Booking {
 		return "Booking [user=" + user + ", car=" + car + ", booking_from_date=" + booking_from_date
 				+ ", booking_to_date=" + booking_to_date + "]";
 	}
-	
 }
