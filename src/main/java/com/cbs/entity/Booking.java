@@ -1,14 +1,16 @@
 package com.cbs.entity;
 
-import java.time.Instant;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,26 +19,36 @@ public class Booking {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@OneToOne(fetch = FetchType.LAZY)
+	@Column(name = "id")
+	private int bookingId;
+	@ManyToOne(fetch = FetchType.LAZY, optional = true,cascade= {CascadeType.ALL})
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,  optional = true,cascade= {CascadeType.ALL})
 	@JoinColumn(name = "car_id", nullable = false)
 	private Car car;
-	private Instant booking_from_date;
-	private Instant booking_to_date;
+	private Date booking_from_date;
+	private Date booking_to_date;
 	
 	public Booking() {
 		super();
 	}
 
-	public Booking(User user, Car car, Instant booking_from_date, Instant booking_to_date) {
+	public Booking(User user, Car car, Date booking_from_date, Date booking_to_date) {
 		super();
 		this.user = user;
 		this.car = car;
 		this.booking_from_date = booking_from_date;
 		this.booking_to_date = booking_to_date;
+	}
+
+	
+	public int getBookingId() {
+		return bookingId;
+	}
+
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
 	}
 
 	public User getUser() {
@@ -55,19 +67,19 @@ public class Booking {
 		this.car = car;
 	}
 
-	public Instant getBooking_from_date() {
+	public Date getBooking_from_date() {
 		return booking_from_date;
 	}
 
-	public void setBooking_from_date(Instant booking_from_date) {
+	public void setBooking_from_date(Date booking_from_date) {
 		this.booking_from_date = booking_from_date;
 	}
 
-	public Instant getBooking_to_date() {
+	public Date getBooking_to_date() {
 		return booking_to_date;
 	}
 
-	public void setBooking_to_date(Instant booking_to_date) {
+	public void setBooking_to_date(Date booking_to_date) {
 		this.booking_to_date = booking_to_date;
 	}
 
