@@ -9,7 +9,6 @@ public class BookingDTO {
 	private CarDTO car;
 	private Instant booking_from_date;
 	private Instant booking_to_date;
-	
 	public BookingDTO() {
 		super();
 	}
