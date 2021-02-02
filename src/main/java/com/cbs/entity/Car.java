@@ -1,5 +1,7 @@
 package com.cbs.entity;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 @Entity
 @Table(name = "car")
@@ -19,14 +30,14 @@ public class Car {
 	private int carId;
 	@Column(length = 25)
 	private String model;
-	@Column(length = 70)
-	private Date insurance_till;
+	 @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
+	 private LocalDateTime insurance_till;
 	
 	public Car() {
 		super();
 	}
-	
-	public Car(String model, Date insurance_till) {
+
+	public Car(String model, LocalDateTime insurance_till) {
 		super();
 		this.model = model;
 		this.insurance_till = insurance_till;
@@ -48,11 +59,11 @@ public class Car {
 		this.model = model;
 	}
 
-	public Date getInsurance_till() {
+	public LocalDateTime getInsurance_till() {
 		return insurance_till;
 	}
 
-	public void setInsurance_till(Date insurance_till) {
+	public void setInsurance_till(LocalDateTime insurance_till) {
 		this.insurance_till = insurance_till;
 	}
 
@@ -60,5 +71,5 @@ public class Car {
 	public String toString() {
 		return "Car [carId=" + carId + ", model=" + model + ", insurance_till=" + insurance_till + "]";
 	}
-
+	
 }
