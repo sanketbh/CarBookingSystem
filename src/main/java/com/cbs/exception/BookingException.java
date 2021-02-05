@@ -4,9 +4,6 @@ import org.springframework.http.HttpStatus;
 
 public class BookingException extends RuntimeException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private HttpStatus httpStatus;
 	private String path;

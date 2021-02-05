@@ -26,7 +26,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-public class CbsApplication implements CommandLineRunner {
+public class CbsApplication {
 
 	@Autowired
 	private ICarService carService; //car service
@@ -48,23 +48,6 @@ public class CbsApplication implements CommandLineRunner {
 				.apis(RequestHandlerSelectors.basePackage("com.cbs.controller"))    //selecting handler
 				.paths(PathSelectors.any())                //selecting request mapping
 				.build();        
-	}
-	@Override
-	public void run(String... args) throws Exception {
-		//date provided by the end user
-		String userDate = "2022-01-02";
-		String[] str = userDate.split("-");
-		//to get an instant of 
-		Calendar cal = Calendar.getInstance();
-		cal.set(Integer.parseInt(str[0]), (Integer.parseInt(str[1])-1),Integer.parseInt(str[2]), 23,00,00);
-		//converting into localDateTime Format
-		LocalDateTime date = cal.getTime() //return date()
-				.toInstant()
-				.atZone(ZoneId.systemDefault())
-				.toLocalDateTime();
-		//new car Object
-		Car car = new Car("Hyundai Verna",date); 
-		carService.addNewCar(car); //saving the 
 	}
 
 }

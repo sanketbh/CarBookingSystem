@@ -1,18 +1,19 @@
 package com.cbs.dto;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 
 public class CarDTO {
 	
 	private String model;
-	private Instant insurance_till;
+	private LocalDateTime insurance_till;
 	
 	public CarDTO() {
 		super();
 	}
 	
-	public CarDTO(String model, Instant insurance_till) {
+	public CarDTO(String model, LocalDateTime insurance_till) {
 		super();
 		this.model = model;
 		this.insurance_till = insurance_till;
@@ -27,11 +28,11 @@ public class CarDTO {
 		this.model = model;
 	}
 
-	public Instant getInsurance_till() {
+	public LocalDateTime getInsurance_till() {
 		return insurance_till;
 	}
 
-	public void setInsurance_till(Instant insurance_till) {
+	public void setInsurance_till(LocalDateTime insurance_till) {
 		this.insurance_till = insurance_till;
 	}
 
