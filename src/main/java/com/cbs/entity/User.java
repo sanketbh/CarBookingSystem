@@ -7,31 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "user")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private int userId;
+
 	@Column(length = 35, nullable = false)
 	private String name;
+
 	@Column(length = 40, nullable = false, unique = true)
 	private String email;
-	
-	public User() {
-		super();
-	}
-
-	public User(String name, String email) {
-		super();
-		this.name = name;
-		this.email = email;
-	}
-
-	
 
 	public int getUserId() {
 		return userId;
@@ -62,6 +50,4 @@ public class User {
 		return "User [userId=" + userId + ", name=" + name + ", email=" + email + "]";
 	}
 
-	
-	
 }

@@ -23,25 +23,16 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 @Entity
 @Table(name = "car")
 public class Car {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private int carId;
+
 	@Column(length = 25)
 	private String model;
-	 @JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
-	 private LocalDateTime insurance_till;
-	
-	public Car() {
-		super();
-	}
 
-	public Car(String model, LocalDateTime insurance_till) {
-		super();
-		this.model = model;
-		this.insurance_till = insurance_till;
-	}
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)
+	private LocalDateTime insurance_till;
 
 	public int getCarId() {
 		return carId;
@@ -71,5 +62,5 @@ public class Car {
 	public String toString() {
 		return "Car [carId=" + carId + ", model=" + model + ", insurance_till=" + insurance_till + "]";
 	}
-	
+
 }

@@ -11,9 +11,11 @@ public class CarService implements ICarService {
 
 	@Autowired
 	private CarRepository carRepository;
-	
+
+	// new car booking
 	@Override
 	public Car addNewCar(Car car) {
-		return carRepository.save(car);
+		car = carRepository.save(car);
+		return car;
 	}
 }
