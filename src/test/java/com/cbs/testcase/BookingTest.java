@@ -127,18 +127,21 @@ public class BookingTest {
 
 	// checking for Exception with wrong user_id.
 	@Test
-	public void UserNotFoundException() {
+	public void UserNotFoundException() throws NotFoundException{
 		User user = new User();
 		user.setName("sanket");
 		user.setEmail("sanket@gmail.com");
 
-		Optional u = Optional.of(user);
-
+		Optional<User> u = Optional.of(user);
+		
+		when(userRepository.findByUserId(0)).thenReturn(u);
+		
 		Assertions.assertThrows(NotFoundException.class, () -> {
-			userRepository.findByUserId(0).orElseThrow(() -> new NotFoundException("message"));
-			//when(userRepository.findByUserId(user.getUserId())).thenThrow(new NotFoundException("me"));
-			//throw new NotFoundException("Not found Exception");
+			userRepository.findByUserId(0).orElseThrow(() -> new NotFoundException("Not found"));
 		});
+		Assertions.assertThrows(NotFoundException.class, () -> {
+		    Integer.parseInt("1");
+		  });
 	}
 
 }

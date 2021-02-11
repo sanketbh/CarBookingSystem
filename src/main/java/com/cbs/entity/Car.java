@@ -26,6 +26,7 @@ public class Car {
 	private int carId;
 
 	@Column(name = "model", length = 25)
+	@NotEmpty(message = "model name cant be empty")
 	private String model;
 
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", shape = JsonFormat.Shape.STRING)

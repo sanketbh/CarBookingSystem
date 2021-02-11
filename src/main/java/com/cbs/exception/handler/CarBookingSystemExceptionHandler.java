@@ -1,5 +1,6 @@
 package com.cbs.exception.handler;
 
+import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -22,12 +23,21 @@ public class CarBookingSystemExceptionHandler {
 		errorResponse.setErrorMessage(e.getLocalizedMessage());
 		return ResponseEntity.status(httpStatus).body(errorResponse);
 	}
-	
-	@ExceptionHandler(value = {MissingServletRequestParameterException.class})
-	public ResponseEntity<ErrorResponse> missingParameterExceptionHandler(MissingServletRequestParameterException e){
+
+	@ExceptionHandler(value = { MissingServletRequestParameterException.class })
+	public ResponseEntity<ErrorResponse> missingParameterExceptionHandler(MissingServletRequestParameterException e) {
 		ErrorResponse errorResponse = new ErrorResponse();
 		errorResponse.setErrorCode(HttpStatus.BAD_REQUEST.value());
 		errorResponse.setErrorMessage(e.getLocalizedMessage());
-		return   ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+	}
+
+	@ExceptionHandler(value = { ConversionFailedException.class })
+	public ResponseEntity<ErrorResponse> ConversionFailedExceptionExceptionHandler(ConversionFailedException e) {
+		ErrorResponse errorResponse = new ErrorResponse();
+		errorResponse.setErrorCode(HttpStatus.BAD_REQUEST.value());
+		String msg = "Date should be in YYYY-MM-dd HH:mm format";
+		errorResponse.setErrorMessage(msg);
+		return ResponseEntity.status(errorResponse.getErrorCode()).body(errorResponse);
 	}
 }
